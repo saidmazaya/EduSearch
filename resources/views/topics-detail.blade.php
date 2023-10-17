@@ -11,6 +11,8 @@
 
         <!-- CSS FILES -->        
         <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -19,6 +21,8 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/main.css" rel="stylesheet">
 
         <link href="css/templatemo-topic-listing.css" rel="stylesheet">
 
@@ -45,35 +49,10 @@
     
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_5">Contact</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                    <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link click-scroll text-black" href="index.html#section_1">Home</a>
+                            </li>         
+                          
                         </ul>
 
                         <div class="d-none d-lg-block">
@@ -82,98 +61,128 @@
                     </div>
                 </div>
             </nav>
-            
-
-            <header class="site-header d-flex flex-column justify-content-center align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center align-items-center">
-
-                        <div class="col-lg-5 col-12 mb-5">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Homepage</a></li>
-
-                                    <li class="breadcrumb-item active" aria-current="page">Web Design</li>
-                                </ol>
-                            </nav>
-
-                            <h2 class="text-white">Introduction to <br> Web Design 101</h2>
-
-                            <div class="d-flex align-items-center mt-5">
-                                <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read More</a>
-
-                                <a href="#top" class="custom-icon bi-bookmark smoothscroll"></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5 col-12">
-                            <div class="topics-detail-block bg-white shadow-lg">
-                                <img src="images/topics/undraw_Remote_design_team_re_urdx.png" class="topics-detail-block-image img-fluid">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </header>
-
-
-            <section class="topics-detail-section section-padding" id="topics-detail">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-8 col-12 m-auto">
-                            <h3 class="mb-4">Introduction to Web Design</h3>
-
-                            <p>So how can you stand out, do something unique and interesting, build an online business, and get paid enough to change life. Please visit TemplateMo website to download free website templates.</p>
-
-                            <p><strong>There are so many ways to make money online</strong>. Below are several platforms you can use to find success. Keep in mind that there is no one path everyone can take. If that were the case, everyone would have a million dollars.</p>
-
-                            <blockquote>
-                                Freelancing your skills isn’t going to make you a millionaire overnight.
-                            </blockquote>
-
-                            <div class="row my-4">
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <img src="images/businesswoman-using-tablet-analysis.jpg" class="topics-detail-block-image img-fluid">
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 col-12 mt-4 mt-lg-0 mt-md-0">
-                                    <img src="images/colleagues-working-cozy-office-medium-shot.jpg" class="topics-detail-block-image img-fluid">
-                                </div>
-                            </div>
-
-                            <p>Most people start with freelancing skills they already have as a side hustle to build up income. This extra cash can be used for a vacation, to boost up savings, investing, build business.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="section-padding section-bg">
-                <div class="container">
-                    <div class="row justify-content-center">
-
-                        <div class="col-lg-5 col-12">
-                            <img src="images/rear-view-young-college-student.jpg" class="newsletter-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
-                            <form class="custom-form subscribe-form" action="#" method="post" role="form">
-                                <h4 class="mb-4 pb-2">Get Newsletter</h4>
-
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email Address" required="">
-
-                                <div class="col-lg-12 col-12">
-                                    <button type="submit" class="form-control">Subscribe</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
         </main>
+            
+        <section class="section-padding">
+            <div class="container">
+                <div class="team-single">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 xs-margin-30px-bottom">
+                            <div class="team-single-img">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                            </div>
+                            <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
+                                <h4 class="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">Class Teacher</h4>
+                                <p class="sm-width-95 sm-margin-auto">We are proud of child student. We teaching great activities and best program for your kids.</p>
+                                <div class="margin-20px-top team-single-icons">
+                                    <ul class="no-margin">
+                                        <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="col-lg-8 col-md-7">
+                            <div class="team-single-text padding-50px-left sm-no-padding-left">
+                                <h4 class="font-size38 sm-font-size32 xs-font-size30">Buckle Giarza</h4>
+                                <p class="no-margin-bottom">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum voluptatem.</p>
+                                <div class="contact-info-section margin-40px-tb">
+                                    <ul class="list-style9 no-margin">
+                                        <li>
+            
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-graduation-cap text-orange"></i>
+                                                    <strong class="margin-10px-left text-orange">Degree:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>Master's Degrees</p>
+                                                </div>
+                                            </div>
+            
+                                        </li>
+                                        <li>
+            
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="far fa-gem text-yellow"></i>
+                                                    <strong class="margin-10px-left text-yellow">Exp.:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>4 Year in Education</p>
+                                                </div>
+                                            </div>
+            
+                                        </li>
+                                        <li>
+            
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="far fa-file text-lightred"></i>
+                                                    <strong class="margin-10px-left text-lightred">Courses:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>Design Category</p>
+                                                </div>
+                                            </div>
+            
+                                        </li>
+                                        <li>
+            
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-map-marker-alt text-green"></i>
+                                                    <strong class="margin-10px-left text-green">Address:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>Regina ST, London, SK.</p>
+                                                </div>
+                                            </div>
+            
+                                        </li>
+                                        <li>
+            
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-mobile-alt text-purple"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>(+44) 123 456 789</p>
+                                                </div>
+                                            </div>
+            
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-envelope text-pink"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p><a href="javascript:void(0)">addyour@emailhere</a></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+            
+            
+                                
+                            </div>
+                        </div>
+            
+                        <div class="col-md-12">
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
 		
         <footer class="site-footer section-padding">
             <div class="container">
