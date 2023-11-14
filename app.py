@@ -5,28 +5,31 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 app = Flask(__name__)
 # Deklarasi Namespace
 INSTANSI_SUMUT = Namespace("https:///schema/Instansi_sumut#")
+PREFIXES = """
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX instansi: <https:///schema/Instansi_sumut#>
+"""
 
 # Fungsi untuk menjalankan query SPARQL
 def run_query(query):
-    sparql = SPARQLWrapper("http://localhost:3030/jsonld/query")
+    sparql = SPARQLWrapper("http://localhost:3030/tubes/query")
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
     return results["results"]["bindings"]
 
 # Query SPARQL untuk mendapatkan informasi tentang TK Ar-Rayhan School
-query_string = """
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX instansi: <https:///schema/Instansi_sumut#>
+query_string = f"""
+{PREFIXES}
 
 SELECT ?subject ?predicate ?object
-WHERE {
+WHERE {{
     ?subject instansi:namaSekolah "TK AR-RAYHAN SCHOOL" .
     ?subject ?predicate ?object .
-}
+}}
 """
 
 @app.route('/tk')
