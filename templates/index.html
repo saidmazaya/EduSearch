@@ -40,7 +40,7 @@ https://templatemo.com/tm-590-topic-listing
         <main>
             <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index">
                         <i class="bi-back"></i>
                         <span>EduSearch</span>
                     </a>
@@ -75,13 +75,13 @@ https://templatemo.com/tm-590-topic-listing
 
                             <h6 class="text-center">platform for creatives around the world</h6>
 
-                            <form method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
+                            <form method="get" action="{{ url_for('index') }}" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text bi-search" id="basic-addon1">
                                         
                                     </span>
 
-                                    <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Cari Nama Sekolah" aria-label="Search">
+                                    <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Cari Nama Sekolah atau NPSN" aria-label="Search">
 
                                     <button type="submit" class="form-control">Search</button>
                                 </div>
@@ -116,24 +116,35 @@ https://templatemo.com/tm-590-topic-listing
                         </tr>
                     </thead>
                     <tbody>
-                        {% for school in all_query %}
-                        <tr>
-                            <td>{{ school["namaSekolah"]["value"] }}</td>
-                            <td>{{ school["npsn"]["value"] }}</td>
-                            {% if school["akreditasi"]["value"] == "" %}
-                                <td>None</td>
-                            {% else %}
-                                <td>{{ school["akreditasi"]["value"] }}</td>
-                            {% endif %}
-                            <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
-                            <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
-                            <!-- Add more cells as needed -->
-                            <td>
-                                <!-- Add action buttons or links as needed -->
-                                <a href="#">View Details</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
+                        {% if keyword %}
+                            {% for school in results %}
+                                <tr>
+                                    <td>{{ school["namaSekolah"]["value"] }}</td>
+                                    <td>{{ school["npsn"]["value"] }}</td>
+                                    <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
+                                    <td>
+                                        <!-- Add action buttons or links as needed -->
+                                        <a href="#">Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for school in all_query %}
+                                <tr>
+                                    <td>{{ school["namaSekolah"]["value"] }}</td>
+                                    <td>{{ school["npsn"]["value"] }}</td>
+                                    <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
+                                    <td>
+                                        <!-- Add action buttons or links as needed -->
+                                        <a href="#">Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </section>      
@@ -197,10 +208,12 @@ https://templatemo.com/tm-590-topic-listing
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script> 
+            // new DataTable('#example');
             // Initialize DataTable without search feature
             document.addEventListener('DOMContentLoaded', function() {
                 var dataTable = new DataTable('#example', {
-                    searching: false
+                    searching: false,
+                    order: [[3, 'desc']],
                 });
             });
         </script>

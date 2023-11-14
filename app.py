@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from rdflib import Graph, Namespace,Literal,URIRef
 from rdflib.plugins.sparql import prepareQuery
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -51,6 +51,7 @@ WHERE {{
 
     # nama , NPSN, bentuk pendidikan, Kecamatan, action
 # 
+
 @app.route('/tk')
 def tk_ar_rayhan_info():
     results = run_query(query_string)
@@ -67,9 +68,32 @@ def home():
 
 @app.route('/index')
 def index():
-    all_query = run_query(query_all)
+    keyword = request.args.get('keyword', default='', type=str)
+    
+    # Your existing SPARQL query with multiple optional patterns for different criteria
+    query_all_a = f"""
+    {PREFIXES}
 
-    return render_template('index.html', all_query=all_query)
+    SELECT DISTINCT ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan
+    WHERE {{
+        ?individu instansi:namaSekolah ?namaSekolah ;
+                instansi:NPSN ?npsn ;
+                instansi:akreditasi ?akreditasi ;
+                instansi:kindOf ?bentukPendidikan ;
+                instansi:locatedIn ?kecamatan .
+
+        FILTER(
+            regex(STR(?namaSekolah), "{keyword}", "i") ||
+            regex(STR(?npsn), "{keyword}", "i")
+        )
+    }}
+    """
+    if keyword:
+        results = run_query(query_all_a)
+        return render_template('index.html', results=results, keyword=keyword)
+    else:
+        all_query = run_query(query_all)
+        return render_template('index.html', all_query=all_query, keyword=keyword)
 
 @app.route('/topic')
 def topic():
