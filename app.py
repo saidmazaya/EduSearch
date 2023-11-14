@@ -97,7 +97,31 @@ def index():
 
 @app.route('/detail/<npsn>')
 def detail(npsn):
-    return render_template('detail.html', npsn=npsn)
+    # SPARQL query to retrieve details for the specified NPSN
+    query_detail = f"""
+    {PREFIXES}
+
+    SELECT DISTINCT *
+    WHERE {{
+        BIND("{npsn}" AS ?targetNPSN)
+        OPTIONAL {{
+            ?individu instansi:NPSN ?targetNPSN ;
+                    instansi:namaSekolah ?namaSekolah ;
+                    instansi:alamat ?alamat ;
+                    instansi:lintang ?lintang ;
+                    instansi:bujur ?bujur ;
+                    instansi:akreditasi ?akreditasi ;
+                    instansi:kindOf ?bentukPendidikan ;
+                    instansi:locatedIn ?kecamatan .
+        }}
+    }}
+    """
+
+    # Execute the SPARQL query
+    data_detail = run_query(query_detail)
+
+    # Pass the results to the template
+    return render_template('detail.html', npsn=npsn, data=data_detail)
 
 
 if __name__ == '__main__':
