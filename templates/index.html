@@ -140,7 +140,7 @@ https://templatemo.com/tm-590-topic-listing
                                     <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
                                     <td>
                                         <!-- Add action buttons or links as needed -->
-                                        <a href="#">Details</a>
+                                        <a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
                                     </td>
                                 </tr>
                             {% endfor %}

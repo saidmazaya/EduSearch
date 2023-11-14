@@ -95,9 +95,9 @@ def index():
         all_query = run_query(query_all)
         return render_template('index.html', all_query=all_query, keyword=keyword)
 
-@app.route('/topic')
-def topic():
-    return render_template('topics.html')
+@app.route('/detail/<npsn>')
+def detail(npsn):
+    return render_template('detail.html', npsn=npsn)
 
 
 if __name__ == '__main__':
