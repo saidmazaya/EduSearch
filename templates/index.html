@@ -107,47 +107,33 @@ https://templatemo.com/tm-590-topic-listing
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Nama</th>
+                            <th>NPSN</th>
+                            <th>Akreditasi</th>
+                            <th>Bentuk Pendidikan</th>
+                            <th>Kecamatan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for school in all_query %}
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
+                            <td>{{ school["namaSekolah"]["value"] }}</td>
+                            <td>{{ school["npsn"]["value"] }}</td>
+                            {% if school["akreditasi"]["value"] == "" %}
+                                <td>None</td>
+                            {% else %}
+                                <td>{{ school["akreditasi"]["value"] }}</td>
+                            {% endif %}
+                            <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                            <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
+                            <!-- Add more cells as needed -->
+                            <td>
+                                <!-- Add action buttons or links as needed -->
+                                <a href="#">View Details</a>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011-07-25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009-01-12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012-03-29</td>
-                            <td>$433,060</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </section>      
@@ -210,7 +196,14 @@ https://templatemo.com/tm-590-topic-listing
         <script src="js/custom.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-        <script> new DataTable('#example'); </script>
+        <script> 
+            // Initialize DataTable without search feature
+            document.addEventListener('DOMContentLoaded', function() {
+                var dataTable = new DataTable('#example', {
+                    searching: false
+                });
+            });
+        </script>
         
     </body>
 </html>

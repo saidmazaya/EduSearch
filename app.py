@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from rdflib import Graph, Namespace,Literal,URIRef
 from rdflib.plugins.sparql import prepareQuery
 from SPARQLWrapper import SPARQLWrapper, JSON
+import json
+
 app = Flask(__name__)
 # Deklarasi Namespace
 INSTANSI_SUMUT = Namespace("https:///schema/Instansi_sumut#")
@@ -29,9 +31,26 @@ SELECT ?subject ?predicate ?object
 WHERE {{
     ?subject instansi:namaSekolah "TK AR-RAYHAN SCHOOL" .
     ?subject ?predicate ?object .
+}}          
+"""
+
+query_all = f"""
+{PREFIXES}
+
+SELECT DISTINCT  ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan 
+WHERE {{
+    OPTIONAL {{
+        ?individu instansi:namaSekolah ?namaSekolah ;
+                instansi:NPSN ?npsn ;
+                instansi:akreditasi ?akreditasi ;
+                instansi:kindOf ?bentukPendidikan ;
+                instansi:locatedIn ?kecamatan .
+    }}
 }}
 """
 
+    # nama , NPSN, bentuk pendidikan, Kecamatan, action
+# 
 @app.route('/tk')
 def tk_ar_rayhan_info():
     results = run_query(query_string)
@@ -48,7 +67,9 @@ def home():
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    all_query = run_query(query_all)
+
+    return render_template('index.html', all_query=all_query)
 
 @app.route('/topic')
 def topic():
