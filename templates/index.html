@@ -38,11 +38,11 @@ https://templatemo.com/tm-590-topic-listing
     <body id="top">
 
         <main>
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index">
                         <i class="bi-back"></i>
-                        <span>Topic</span>
+                        <span>EduSearch</span>
                     </a>
 
                     <div class="d-lg-none ms-auto me-4">
@@ -55,21 +55,7 @@ https://templatemo.com/tm-590-topic-listing
     
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_1">Home</a>
-                            </li>
-
-                          
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                    <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-                                </ul>
-                            </li>
+                            
                         </ul>
 
                         <div class="d-none d-lg-block">
@@ -89,13 +75,13 @@ https://templatemo.com/tm-590-topic-listing
 
                             <h6 class="text-center">platform for creatives around the world</h6>
 
-                            <form method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
+                            <form method="get" action="{{ url_for('index') }}" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text bi-search" id="basic-addon1">
                                         
                                     </span>
 
-                                    <input name="keyword" type="search" class="form-control" id="keyword" placeholder="cari nama sekolah disini" aria-label="Search">
+                                    <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Cari Nama Sekolah atau NPSN" aria-label="Search">
 
                                     <button type="submit" class="form-control">Search</button>
                                 </div>
@@ -121,47 +107,44 @@ https://templatemo.com/tm-590-topic-listing
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Nama</th>
+                            <th>NPSN</th>
+                            <th>Akreditasi</th>
+                            <th>Bentuk Pendidikan</th>
+                            <th>Kecamatan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011-07-25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009-01-12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012-03-29</td>
-                            <td>$433,060</td>
-                        </tr>
+                        {% if keyword %}
+                            {% for school in results %}
+                                <tr>
+                                    <td>{{ school["namaSekolah"]["value"] }}</td>
+                                    <td>{{ school["npsn"]["value"] }}</td>
+                                    <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
+                                    <td>
+                                        <!-- Add action buttons or links as needed -->
+                                        <a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for school in all_query %}
+                                <tr>
+                                    <td>{{ school["namaSekolah"]["value"] }}</td>
+                                    <td>{{ school["npsn"]["value"] }}</td>
+                                    <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
+                                    <td>
+                                        <!-- Add action buttons or links as needed -->
+                                        <a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </section>      
@@ -224,7 +207,16 @@ https://templatemo.com/tm-590-topic-listing
         <script src="js/custom.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-        <script> new DataTable('#example'); </script>
+        <script> 
+            // new DataTable('#example');
+            // Initialize DataTable without search feature
+            document.addEventListener('DOMContentLoaded', function() {
+                var dataTable = new DataTable('#example', {
+                    searching: false,
+                    order: [[3, 'desc']],
+                });
+            });
+        </script>
         
     </body>
 </html>
