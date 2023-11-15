@@ -226,6 +226,7 @@
                             <li class="site-footer-link-item">
                                 <a href="#" class="site-footer-link">Contact</a>
                             </li>
+                            <a href="https://maps.google.co.id/maps?expflags=enable_star_based_justifications:true&ie=UTF8&f=d&daddr={{data[0]['lintang']['value']}},{{data[0]['bujur']['value']}}">djklfhdsjiklhikfhkifdhks</a>
                         </ul>
                     </div>
                 </div>
@@ -238,24 +239,63 @@
         <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
         <script src="{{url_for('static', filename='js/custom.js')}}"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script>
-            // Convert string representations to numbers
-            var latitude = data[0]["lintang"]["value"];
-            var longitude = data[0]["bujur"]["value"];
+        <!-- <script>
+            var data = {{ data | safe }};
         
-            // Initialize the map
-            var map = L.map('map').setView([latitude, longitude], 15);
-          
-            // Add a tile layer (you can use any tile provider, here is OpenStreetMap)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-          
-            // Add a marker to the map
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Your school location')
-                .openPopup();
+            // Check if data is not empty before accessing properties
+            if (data.length > 0) {
+                var latitude = parseFloat(data[0]["lintang"]["value"]);
+                var longitude = parseFloat(data[0]["bujur"]["value"]);
+        
+                console.log("Parsed Latitude:", latitude);
+                console.log("Parsed Longitude:", longitude);
+        
+                // Initialize the map
+                var map = L.map('map').setView([latitude, longitude], 15);
+        
+                // Add a tile layer (you can use any tile provider, here is OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+        
+                // Add a marker to the map
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup(`${data[0]["namaSekolah"]["value"]}`)
+                    .openPopup();
+            } else {
+                console.error("No data available for the specified school.");
+            }
         </script>
+         -->
+         <script>
+            var data = {{ data | safe }};
+        
+            // Check if data is not empty before accessing properties
+            if (data.length > 0) {
+                var latitude = parseFloat(data[0]["lintang"]["value"]);
+                var longitude = parseFloat(data[0]["bujur"]["value"]);
+        
+                console.log("Parsed Latitude:", latitude);
+                console.log("Parsed Longitude:", longitude);
+        
+                // Initialize the map
+                var map = L.map('map').setView([latitude, longitude], 15);
+        
+                // Add a tile layer (you can use any tile provider, here is OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+        
+                // Create a marker with a popup
+                var marker = L.marker([latitude, longitude]).addTo(map);
+                marker.bindPopup(`${data[0]["namaSekolah"]["value"]}<br><a href="https://maps.google.co.id/maps?expflags=enable_star_based_justifications:true&ie=UTF8&f=d&daddr=${latitude},${longitude}" target="_blank">View on Google Maps</a>`).openPopup();
+            } else {
+                console.error("No data available for the specified school.");
+            }
+        </script>
+        
+        <!-- Add a container for the Google Maps link -->
+          
 
     </body>
 </html>

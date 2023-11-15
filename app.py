@@ -119,6 +119,7 @@ def detail(npsn):
 
     # Execute the SPARQL query
     data_detail = run_query(query_detail)
+    
 
     # Pass the results to the template
     return render_template('detail.html', npsn=npsn, data=data_detail)
