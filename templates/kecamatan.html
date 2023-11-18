@@ -32,10 +32,9 @@
                 max-width: 300px; 
                 margin: auto; 
                 padding: 10px;   
-                flex-direction: row;
+                
             } 
-            
-            
+
             .custom-navbar {
                 background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);   
 }
@@ -45,7 +44,7 @@
         
     </head>
     
-    <body id="top" style="background: linear-gradient(to right, #085582, #80d0c7 100%);">
+    <body id="top" style="background: fff;">
 
         <main>
             <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
@@ -63,9 +62,8 @@
         </main>
             
            
-        <section class="section-padding">
-            <div class="container">
-                
+      
+                <section class="section-padding">
                     <script>
                         var kecamatanList = [
                           "Medan Helvetia",
@@ -105,16 +103,7 @@
                             document.body.appendChild(document.createElement("br")); // Menambahkan elemen <br> setelah setiap tautan
                         }
                       </script>
- 
-            
-
-                
-            </div>
-
-           
-        </section>
-        </section>
-      
+ </section>
 		
         <footer class="site-footer section-padding">
             <div class="container">
@@ -145,10 +134,39 @@
         </footer>
 
         <!-- JAVASCRIPT FILES -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
         <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
         <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
         <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Initialize DataTable
+                var table = $('#example').DataTable({
+                    dom: 'lrtip',
+                    order: [[3, 'desc']]
+                });
+        
+            // Handle dropdown item click
+            $('.bentuk-dropdown-item').on('click', function () {
+                    // Get the selected bentukPendidikan value
+                    var selectedBentuk = $(this).data('bentuk');
+
+                    console.log('Selected Bentuk:', selectedBentuk);
+
+                    // Reset the search input and draw the DataTable to show all data
+                    table.search('').columns().search('').draw();
+
+                    if (selectedBentuk !== 'Semua Jenjang') {
+                        // If not "Semua Jenjang," set the search to the selected bentukPendidikan
+                        table.columns(3).search(selectedBentuk.replace('https:///schema/Instansi_sumut#', '').replace('_', ' ')).draw();
+                    }
+                });
+            });
+        </script> 
 
     </body>
 </html>
