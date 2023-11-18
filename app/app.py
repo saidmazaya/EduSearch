@@ -94,32 +94,33 @@ def index():
 
     # SPARQL query with filter for bentukPendidikan if available
     query_all_a = f"""
-    {PREFIXES}
+{PREFIXES}
 
-    SELECT DISTINCT ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan
-    WHERE {{
-        ?individu instansi:namaSekolah ?namaSekolah ;
-                instansi:NPSN ?npsn ;
-                instansi:akreditasi ?akreditasi ;
-                instansi:kindOf ?bentukPendidikan ;
-                instansi:locatedIn ?kecamatan .
+SELECT DISTINCT ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan
+WHERE {{
+    ?individu instansi:namaSekolah ?namaSekolah ;
+            instansi:NPSN ?npsn ;
+            instansi:akreditasi ?akreditasi ;
+            instansi:kindOf ?bentukPendidikan ;
+            instansi:locatedIn ?kecamatan .
 
-        FILTER(
-            regex(STR(?namaSekolah), "{keyword}", "i") ||
-            regex(STR(?npsn), "{keyword}", "i")
-        )
+    FILTER(
+        regex(STR(?namaSekolah), "{keyword}", "i") ||
+        regex(STR(?npsn), "{keyword}", "i")
+    )
 
-        {f'FILTER(?bentukPendidikan = <{bentuk_pendidikan}>)' if bentuk_pendidikan else ''}
-    }}
+   {f'FILTER(?bentukPendidikan = "{bentuk_pendidikan}")' if bentuk_pendidikan else ''}
+
+}}
     """
 
     if keyword or bentuk_pendidikan:
         results = run_query(query_all_a)
-        return render_template('index.html', results=results, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification)
+        return render_template('index.html', results=results, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification, selectedBentuk=bentuk_pendidikan)
     else:
         # Include this line to get all bentuk pendidikan if no filter is applied
         all_query = run_query(query_all)
-        return render_template('index.html', all_query=all_query, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification)
+        return render_template('index.html', all_query=all_query, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification, selectedBentuk=bentuk_pendidikan)
 
 @app.route('/detail/<npsn>')
 def detail(npsn):

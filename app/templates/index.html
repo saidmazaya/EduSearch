@@ -112,12 +112,12 @@ https://templatemo.com/tm-590-topic-listing
                         {% for bentuk_pendidikan in bentuk_pendidikan_classification %}
                             <li>
                                 <a class="dropdown-item bentuk-dropdown-item" data-bentuk="{{ bentuk_pendidikan['bentukPendidikan'] }}">
-                                    {{ bentuk_pendidikan['bentukPendidikan'].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ')}}
+                                    {{ bentuk_pendidikan['bentukPendidikan'].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}
                                 </a>
                             </li>
                         {% endfor %}
                     </ul>
-                </div>                
+                </div>           
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
@@ -136,7 +136,7 @@ https://templatemo.com/tm-590-topic-listing
                                     <td>{{ school["namaSekolah"]["value"] }}</td>
                                     <td>{{ school["npsn"]["value"] }}</td>
                                     <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
-                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>                                    
                                     <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
                                     <td>
                                         <!-- Add action buttons or links as needed -->
@@ -150,7 +150,7 @@ https://templatemo.com/tm-590-topic-listing
                                     <td>{{ school["namaSekolah"]["value"] }}</td>
                                     <td>{{ school["npsn"]["value"] }}</td>
                                     <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
-                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+                                    <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>                                    
                                     <td>{{ school["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</td>
                                     <td>
                                         <!-- Add action buttons or links as needed -->
@@ -159,7 +159,7 @@ https://templatemo.com/tm-590-topic-listing
                                 </tr>
                             {% endfor %}
                         {% endif %}
-                    </tbody>
+                    </tbody>                    
                 </table>
             </section>      
         </main>
@@ -210,16 +210,25 @@ https://templatemo.com/tm-590-topic-listing
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script> 
-            // new DataTable('#example');
-            // Initialize DataTable without search feature
-            document.addEventListener('DOMContentLoaded', function() {
-                // Initialize DataTable without search feature
-                var dataTable = new DataTable('#example', {
-                    searching: false,
-                    order: [[3, 'desc']],
+        <script>
+            $(document).ready(function () {
+                // Initialize DataTable
+                var table = $('#example').DataTable();
+        
+                // Handle dropdown item click
+                $('.bentuk-dropdown-item').on('click', function () {
+                    // Get the selected bentukPendidikan value
+                    var selectedBentuk = $(this).data('bentuk');
+        
+                    console.log('Selected Bentuk:', selectedBentuk);
+        
+                    // Clear the search input and then set the search to the selected bentukPendidikan
+                    table.columns(3).search('').draw();
+        
+                    // Replace the specific part related to the selectedBentuk value
+                    table.columns(3).search(selectedBentuk.replace('https:///schema/Instansi_sumut#', '').replace('_', ' ')).draw();
                 });
             });
-        </script>
+        </script>                  
     </body>
 </html>
