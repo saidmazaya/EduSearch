@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Web Semantik</title>
+
+        <!-- CSS FILES -->        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+                        
+        <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet">
+        <style>
+             .btn {
+                width: 20%; 
+                display: flex;
+                max-width: 300px; 
+                margin: auto; 
+                padding: 10px;   
+                flex-direction: row;
+            } 
+            
+            
+            .custom-navbar {
+                background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);   
+}
+  </style>
+
+
+        
+    </head>
+    
+    <body id="top" style="background: linear-gradient(to right, #085582, #80d0c7 100%);">
+
+        <main>
+            <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+                <div class="container">
+                    <a class="navbar-brand" href="index">
+                        <i class="bi-back"></i>
+                        <span>EduSearch</span>
+                    </a>
+    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </main>
+            
+           
+        <section class="section-padding">
+            <div class="container">
+                
+                    <script>
+                        var kecamatanList = [
+                          "Medan Helvetia",
+                          "Medan Denai",
+                          "Medan Marelan",
+                          "Medan Johor",
+                          "Medan Labuhan",
+                          "Medan Sunggal",
+                          "Medan Deli",
+                          "Medan Kota",
+                          "Medan Tembung",
+                          "Medan Tuntungan",
+                          "Medan Timur",
+                          "Medan Amplas",
+                          "Medan Selayang",
+                          "Medan Area",
+                          "Medan Perjuangan",
+                          "Medan Kota Belawan",
+                          "Medan Petisah",
+                          "Medan Barat",
+                          "Medan Baru",
+                          "Medan Maimun",
+                          "Medan Polonia"
+                        ];
+                      
+                        for (var i = 0; i < kecamatanList.length; i++) {
+                            var kecamatan = kecamatanList[i];
+                            var hrefValue = "index/" + kecamatan.replace(/\s/g, '_');
+
+                            var buttonElement = document.createElement("a");
+                            buttonElement.setAttribute("type", "button");
+                            buttonElement.setAttribute("class", "btn btn-success btn-rounded");
+                            buttonElement.setAttribute("href", hrefValue);
+                            buttonElement.textContent = kecamatan;
+
+                            document.body.appendChild(buttonElement);
+                            document.body.appendChild(document.createElement("br")); // Menambahkan elemen <br> setelah setiap tautan
+                        }
+                      </script>
+ 
+            
+
+                
+            </div>
+
+           
+        </section>
+        </section>
+      
+		
+        <footer class="site-footer section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-12 mb-4 pb-2">
+                        <a class="navbar-brand mb-2">
+                            <i class="bi-back"></i>
+                            <span class="text-dark">EduSearch</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                        <h6 class="site-footer-title mb-3">About Us</h6>
+
+                        <p class="text-black d-flex mb-1">
+                            
+                                Kelompok 1          
+                        </p>
+
+                        <p class="text-black d-flex">
+                            Web Semantik
+                        </p>
+                    </div>
+
+                 
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
+        <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+
+    </body>
+</html>

@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 from rdflib import Graph, Namespace,Literal,URIRef
 from rdflib.plugins.sparql import prepareQuery
 from SPARQLWrapper import SPARQLWrapper, JSON
+from flask import render_template, request, url_for
 import json
 
 app = Flask(__name__)
@@ -22,6 +23,22 @@ def run_query(query):
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
     return results["results"]["bindings"]
+
+def get_bentuk_pendidikan_classification():
+    query = f"""
+    {PREFIXES}
+
+    SELECT DISTINCT ?bentukPendidikan
+    WHERE {{
+      ?individu instansi:namaSekolah ?namaSekolah ;
+                instansi:kindOf ?bentukPendidikan .
+      FILTER (
+        !CONTAINS(STR(?bentukPendidikan), "SPK")
+      )
+    }}
+    """
+    results = run_query(query)
+    return [{'bentukPendidikan': result['bentukPendidikan']['value']} for result in results]
 
 # Query SPARQL untuk mendapatkan informasi tentang TK Ar-Rayhan School
 query_string = f"""
@@ -57,6 +74,12 @@ def tk_ar_rayhan_info():
     results = run_query(query_string)
     return render_template('tk_info.html', results=results)
 
+@app.route('/kecamatan')
+def kecamatan():
+    # Add any logic or data retrieval needed for the kecamatan page
+    return render_template('kecamatan.html')
+
+
 @app.route('/')
 def home():
     data_to_pass = {
@@ -66,34 +89,44 @@ def home():
     }
     return render_template('home.html', data=data_to_pass)
 
+# Fungsi route '/index'
 @app.route('/index')
 def index():
     keyword = request.args.get('keyword', default='', type=str)
-    
-    # Your existing SPARQL query with multiple optional patterns for different criteria
+    bentuk_pendidikan = request.args.get('bentukPendidikan', default='', type=str)
+
+    # Get bentuk_pendidikan_classification for dropdown
+    bentuk_pendidikan_classification = get_bentuk_pendidikan_classification()
+
+    # SPARQL query with filter for bentukPendidikan if available
     query_all_a = f"""
-    {PREFIXES}
+        {PREFIXES}
 
-    SELECT DISTINCT ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan
-    WHERE {{
-        ?individu instansi:namaSekolah ?namaSekolah ;
-                instansi:NPSN ?npsn ;
-                instansi:akreditasi ?akreditasi ;
-                instansi:kindOf ?bentukPendidikan ;
-                instansi:locatedIn ?kecamatan .
+        SELECT DISTINCT ?namaSekolah ?npsn ?akreditasi ?bentukPendidikan ?kecamatan
+        WHERE {{
+            ?individu instansi:namaSekolah ?namaSekolah ;
+                    instansi:NPSN ?npsn ;
+                    instansi:akreditasi ?akreditasi ;
+                    instansi:kindOf ?bentukPendidikan ;
+                    instansi:locatedIn ?kecamatan .
 
-        FILTER(
-            regex(STR(?namaSekolah), "{keyword}", "i") ||
-            regex(STR(?npsn), "{keyword}", "i")
-        )
-    }}
+            FILTER(
+                regex(STR(?namaSekolah), "{keyword}", "i") ||
+                regex(STR(?npsn), "{keyword}", "i")
+            )
+
+   {f'FILTER(?bentukPendidikan = "{bentuk_pendidikan}")' if bentuk_pendidikan else ''}
+
+}}
     """
-    if keyword:
+
+    if keyword or bentuk_pendidikan:
         results = run_query(query_all_a)
-        return render_template('index.html', results=results, keyword=keyword)
+        return render_template('index.html', results=results, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification, selectedBentuk=bentuk_pendidikan)
     else:
+        # Include this line to get all bentuk pendidikan if no filter is applied
         all_query = run_query(query_all)
-        return render_template('index.html', all_query=all_query, keyword=keyword)
+        return render_template('index.html', all_query=all_query, keyword=keyword, bentuk_pendidikan_classification=bentuk_pendidikan_classification, selectedBentuk=bentuk_pendidikan)
 
 @app.route('/detail/<npsn>')
 def detail(npsn):
@@ -109,8 +142,12 @@ def detail(npsn):
                     instansi:namaSekolah ?namaSekolah ;
                     instansi:alamat ?alamat ;
                     instansi:lintang ?lintang ;
+                    instansi:Status ?status ;
+                    instansi:kabupaten ?kabupaten ;
                     instansi:bujur ?bujur ;
+                    instansi:tanggalPendirian ?tanggalPendirian ;
                     instansi:akreditasi ?akreditasi ;
+                    instansi:linkSekolah ?linkSekolah ;
                     instansi:kindOf ?bentukPendidikan ;
                     instansi:locatedIn ?kecamatan .
         }}
@@ -119,7 +156,6 @@ def detail(npsn):
 
     # Execute the SPARQL query
     data_detail = run_query(query_detail)
-    
 
     # Pass the results to the template
     return render_template('detail.html', npsn=npsn, data=data_detail)
@@ -127,7 +163,6 @@ def detail(npsn):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
 
