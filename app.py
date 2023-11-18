@@ -79,6 +79,30 @@ def kecamatan():
     # Add any logic or data retrieval needed for the kecamatan page
     return render_template('kecamatan.html')
 
+@app.route('/kecamatan/<kecamatan>')
+def kecamatan_detail(kecamatan):
+    # Logic to handle the kecamatan parameter and modify SPARQL query
+    query_by_kecamatan = f"""
+    {PREFIXES}
+
+    SELECT DISTINCT *
+        WHERE {{
+            BIND("https:///schema/Instansi_sumut#Kecamatan_{kecamatan}" AS ?targetKecamatan)
+            OPTIONAL {{
+                ?individu instansi:namaSekolah ?namaSekolah ;
+                    instansi:NPSN ?npsn ;
+                    instansi:akreditasi ?akreditasi ;
+                    instansi:kindOf ?bentukPendidikan ;
+                    instansi:locatedIn ?targetKecamatan .
+            }}
+        }}
+    """
+
+    results = run_query(query_by_kecamatan)
+    bentuk_pendidikan_classification = get_bentuk_pendidikan_classification()
+
+    return render_template('kecamatan.html', results=results, selectedKecamatan=kecamatan, bentuk_pendidikan_classification=bentuk_pendidikan_classification)
+
 
 @app.route('/')
 def home():

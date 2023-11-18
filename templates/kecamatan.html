@@ -26,19 +26,22 @@
 
         <link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet">
         <style>
-             .btn {
-                width: 20%; 
-                display: flex;
-                max-width: 300px; 
-                margin: auto; 
-                padding: 10px;   
-                
-            } 
+        #kecamatan-button {
+            display: flex;
+            flex-direction: row; 
+            flex-wrap: wrap; 
+            margin-left: 20px;
+        }
+
+        .btn {
+            margin-right: 10px; /* Memberi jarak antara tombol */
+            margin-bottom: 10px; /* Memberi jarak antara baris */
+        }
 
             .custom-navbar {
                 background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);   
-}
-  </style>
+            }
+        </style>
 
 
         
@@ -49,7 +52,7 @@
         <main>
             <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
                 <div class="container">
-                    <a class="navbar-brand" href="index">
+                    <a class="navbar-brand" href="/index">
                         <i class="bi-back"></i>
                         <span>EduSearch</span>
                     </a>
@@ -63,48 +66,74 @@
             
            
       
-                <section class="section-padding">
-                    <script>
-                        var kecamatanList = [
-                          "Medan Helvetia",
-                          "Medan Denai",
-                          "Medan Marelan",
-                          "Medan Johor",
-                          "Medan Labuhan",
-                          "Medan Sunggal",
-                          "Medan Deli",
-                          "Medan Kota",
-                          "Medan Tembung",
-                          "Medan Tuntungan",
-                          "Medan Timur",
-                          "Medan Amplas",
-                          "Medan Selayang",
-                          "Medan Area",
-                          "Medan Perjuangan",
-                          "Medan Kota Belawan",
-                          "Medan Petisah",
-                          "Medan Barat",
-                          "Medan Baru",
-                          "Medan Maimun",
-                          "Medan Polonia"
-                        ];
-                      
-                        for (var i = 0; i < kecamatanList.length; i++) {
-                            var kecamatan = kecamatanList[i];
-                            var hrefValue = "index/" + kecamatan.replace(/\s/g, '_');
-
-                            var buttonElement = document.createElement("a");
-                            buttonElement.setAttribute("type", "button");
-                            buttonElement.setAttribute("class", "btn btn-success btn-rounded");
-                            buttonElement.setAttribute("href", hrefValue);
-                            buttonElement.textContent = kecamatan;
-
-                            document.body.appendChild(buttonElement);
-                            document.body.appendChild(document.createElement("br")); // Menambahkan elemen <br> setelah setiap tautan
-                        }
-                      </script>
- </section>
-		
+        <section class="section-padding" id="kecamatan-button">
+            <a href="/kecamatan/Medan_Helvetia" class="btn btn-success btn-rounded" type="button">Medan Helvetia</a><br>
+            <a href="/kecamatan/Medan_Denai" class="btn btn-success btn-rounded" type="button">Medan Denai</a><br>
+            <a href="/kecamatan/Medan_Marelan" class="btn btn-success btn-rounded" type="button">Medan Marelan</a><br>
+            <a href="/kecamatan/Medan_Johor" class="btn btn-success btn-rounded" type="button">Medan Johor</a><br>
+            <a href="/kecamatan/Medan_Labuhan" class="btn btn-success btn-rounded" type="button">Medan Labuhan</a><br>
+            <a href="/kecamatan/Medan_Sunggal" class="btn btn-success btn-rounded" type="button">Medan Sunggal</a><br>
+            <a href="/kecamatan/Medan_Deli" class="btn btn-success btn-rounded" type="button">Medan Deli</a><br>
+            <a href="/kecamatan/Medan_Kota" class="btn btn-success btn-rounded" type="button">Medan Kota</a><br>
+            <a href="/kecamatan/Medan_Tembung" class="btn btn-success btn-rounded" type="button">Medan Tembung</a><br>
+            <a href="/kecamatan/Medan_Tuntungan" class="btn btn-success btn-rounded" type="button">Medan Tuntungan</a><br>
+            <a href="/kecamatan/Medan_Timur" class="btn btn-success btn-rounded" type="button">Medan Timur</a><br>
+            <a href="/kecamatan/Medan_Amplas" class="btn btn-success btn-rounded" type="button">Medan Amplas</a><br>
+            <a href="/kecamatan/Medan_Selayang" class="btn btn-success btn-rounded" type="button">Medan Selayang</a><br>
+            <a href="/kecamatan/Medan_Area" class="btn btn-success btn-rounded" type="button">Medan Area</a><br>
+            <a href="/kecamatan/Medan_Perjuangan" class="btn btn-success btn-rounded" type="button">Medan Perjuangan</a><br>
+            <a href="/kecamatan/Medan_Kota_Belawan" class="btn btn-success btn-rounded" type="button">Medan Kota Belawan</a><br>
+            <a href="/kecamatan/Medan_Petisah" class="btn btn-success btn-rounded" type="button">Medan Petisah</a><br>
+            <a href="/kecamatan/Medan_Barat" class="btn btn-success btn-rounded" type="button">Medan Barat</a><br>
+            <a href="/kecamatan/Medan_Baru" class="btn btn-success btn-rounded" type="button">Medan Baru</a><br>
+            <a href="/kecamatan/Medan_Maimun" class="btn btn-success btn-rounded" type="button">Medan Maimun</a><br>
+            <a href="/kecamatan/Medan_Polonia" class="btn btn-success btn-rounded" type="button">Medan Polonia</a><br>
+        </section>
+        
+        <section class="section-padding" id="tabel" style="margin: 0 auto; margin-top:20px; width: 80%; padding: 10px">        
+            <div class="btn-group mb-3">
+                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Semua Jenjang
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="bentukDropdown">
+                    <a class="dropdown-item bentuk-dropdown-item" data-bentuk="Semua Jenjang">Semua Jenjang</a>
+                    {% for bentuk_pendidikan in bentuk_pendidikan_classification %}
+                        <li>
+                            <a class="dropdown-item bentuk-dropdown-item" data-bentuk="{{ bentuk_pendidikan['bentukPendidikan'] }}">
+                                {{ bentuk_pendidikan['bentukPendidikan'].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>           
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>NPSN</th>
+                        <th>Akreditasi</th>
+                        <th>Bentuk Pendidikan</th>
+                        <th>Kecamatan</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for school in results %}
+                        <tr>
+                            <td>{{ school["namaSekolah"]["value"] }}</td>
+                            <td>{{ school["npsn"]["value"] }}</td>
+                            <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+                            <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>                                    
+                            <td>{{ selectedKecamatan.replace('_', ' ') }}</td>
+                            <td>
+                                <!-- Add action buttons or links as needed -->
+                                <a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>                    
+            </table>
+        </section>      
         <footer class="site-footer section-padding">
             <div class="container">
                 <div class="row">
@@ -167,6 +196,19 @@
                 });
             });
         </script> 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var tabelSection = document.getElementById('tabel');
+                
+                // Check if the URL contains a kecamatan parameter
+                var kecamatanParam = window.location.pathname.split('/')[2]; // Assuming kecamatan is the third part of the path
+                
+                // Hide the section if the kecamatan parameter is not present
+                if (!kecamatanParam) {
+                    tabelSection.style.display = 'none';
+                }
+            });
+        </script>
 
     </body>
 </html>
