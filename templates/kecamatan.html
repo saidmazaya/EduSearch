@@ -1,214 +1,194 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+		<meta name="description" content="" />
+		<meta name="author" content="" />
 
-        <title>Web Semantik</title>
+		<title>Web Semantik</title>
 
-        <!-- CSS FILES -->        
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+		<!-- CSS FILES -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
 
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
-                        
-        <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet" />
 
-        <link href="{{url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet">
+		<link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
 
-        <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+		<link href="{{url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet" />
 
-        <link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet">
-        <style>
-        #kecamatan-button {
-            display: flex;
-            flex-direction: row; 
-            flex-wrap: wrap; 
-            margin-left: 20px;
-        }
+		<link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
 
-        .btn {
-            margin-right: 10px; /* Memberi jarak antara tombol */
-            margin-bottom: 10px; /* Memberi jarak antara baris */
-        }
+		<link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet" />
+		<style>
+			#kecamatan-button {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				margin-left: 20px;
+			}
 
-            .custom-navbar {
-                background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);   
-            }
-        </style>
+			.btn {
+				margin-right: 10px; /* Memberi jarak antara tombol */
+				margin-bottom: 10px; /* Memberi jarak antara baris */
+			}
 
+			.custom-navbar {
+				background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+			}
+		</style>
+	</head>
 
-        
-    </head>
-    
-    <body id="top" style="background: fff;">
+	<body id="top" style="background: fff">
+		<main>
+			<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+				<div class="container">
+					<a class="navbar-brand" href="/index">
+						<i class="bi-back"></i>
+						<span>EduSearch</span>
+					</a>
 
-        <main>
-            <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
-                <div class="container">
-                    <a class="navbar-brand" href="/index">
-                        <i class="bi-back"></i>
-                        <span>EduSearch</span>
-                    </a>
-    
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-            </nav>
-        </main>
-            
-           
-      
-        <section class="section-padding" id="kecamatan-button">
-            <a href="/kecamatan/Medan_Helvetia" class="btn btn-success btn-rounded" type="button">Medan Helvetia</a><br>
-            <a href="/kecamatan/Medan_Denai" class="btn btn-success btn-rounded" type="button">Medan Denai</a><br>
-            <a href="/kecamatan/Medan_Marelan" class="btn btn-success btn-rounded" type="button">Medan Marelan</a><br>
-            <a href="/kecamatan/Medan_Johor" class="btn btn-success btn-rounded" type="button">Medan Johor</a><br>
-            <a href="/kecamatan/Medan_Labuhan" class="btn btn-success btn-rounded" type="button">Medan Labuhan</a><br>
-            <a href="/kecamatan/Medan_Sunggal" class="btn btn-success btn-rounded" type="button">Medan Sunggal</a><br>
-            <a href="/kecamatan/Medan_Deli" class="btn btn-success btn-rounded" type="button">Medan Deli</a><br>
-            <a href="/kecamatan/Medan_Kota" class="btn btn-success btn-rounded" type="button">Medan Kota</a><br>
-            <a href="/kecamatan/Medan_Tembung" class="btn btn-success btn-rounded" type="button">Medan Tembung</a><br>
-            <a href="/kecamatan/Medan_Tuntungan" class="btn btn-success btn-rounded" type="button">Medan Tuntungan</a><br>
-            <a href="/kecamatan/Medan_Timur" class="btn btn-success btn-rounded" type="button">Medan Timur</a><br>
-            <a href="/kecamatan/Medan_Amplas" class="btn btn-success btn-rounded" type="button">Medan Amplas</a><br>
-            <a href="/kecamatan/Medan_Selayang" class="btn btn-success btn-rounded" type="button">Medan Selayang</a><br>
-            <a href="/kecamatan/Medan_Area" class="btn btn-success btn-rounded" type="button">Medan Area</a><br>
-            <a href="/kecamatan/Medan_Perjuangan" class="btn btn-success btn-rounded" type="button">Medan Perjuangan</a><br>
-            <a href="/kecamatan/Medan_Kota_Belawan" class="btn btn-success btn-rounded" type="button">Medan Kota Belawan</a><br>
-            <a href="/kecamatan/Medan_Petisah" class="btn btn-success btn-rounded" type="button">Medan Petisah</a><br>
-            <a href="/kecamatan/Medan_Barat" class="btn btn-success btn-rounded" type="button">Medan Barat</a><br>
-            <a href="/kecamatan/Medan_Baru" class="btn btn-success btn-rounded" type="button">Medan Baru</a><br>
-            <a href="/kecamatan/Medan_Maimun" class="btn btn-success btn-rounded" type="button">Medan Maimun</a><br>
-            <a href="/kecamatan/Medan_Polonia" class="btn btn-success btn-rounded" type="button">Medan Polonia</a><br>
-        </section>
-        
-        <section class="section-padding" id="tabel" style="margin: 0 auto; margin-top:20px; width: 80%; padding: 10px">        
-            <div class="btn-group mb-3">
-                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Semua Jenjang
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="bentukDropdown">
-                    <a class="dropdown-item bentuk-dropdown-item" data-bentuk="Semua Jenjang">Semua Jenjang</a>
-                    {% for bentuk_pendidikan in bentuk_pendidikan_classification %}
-                        <li>
-                            <a class="dropdown-item bentuk-dropdown-item" data-bentuk="{{ bentuk_pendidikan['bentukPendidikan'] }}">
-                                {{ bentuk_pendidikan['bentukPendidikan'].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>           
-            <table id="example" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>NPSN</th>
-                        <th>Akreditasi</th>
-                        <th>Bentuk Pendidikan</th>
-                        <th>Kecamatan</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for school in results %}
-                        <tr>
-                            <td>{{ school["namaSekolah"]["value"] }}</td>
-                            <td>{{ school["npsn"]["value"] }}</td>
-                            <td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
-                            <td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>                                    
-                            <td>{{ selectedKecamatan.replace('_', ' ') }}</td>
-                            <td>
-                                <!-- Add action buttons or links as needed -->
-                                <a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>                    
-            </table>
-        </section>      
-        <footer class="site-footer section-padding">
-            <div class="container">
-                <div class="row">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+			</nav>
+		</main>
 
-                    <div class="col-lg-3 col-12 mb-4 pb-2">
-                        <a class="navbar-brand mb-2">
-                            <i class="bi-back"></i>
-                            <span class="text-dark">EduSearch</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">About Us</h6>
+		<section class="section-padding" id="kecamatan-button">
+			<a href="/kecamatan/Medan_Helvetia" class="btn btn-success btn-rounded" type="button">Medan Helvetia</a><br />
+			<a href="/kecamatan/Medan_Denai" class="btn btn-success btn-rounded" type="button">Medan Denai</a><br />
+			<a href="/kecamatan/Medan_Marelan" class="btn btn-success btn-rounded" type="button">Medan Marelan</a><br />
+			<a href="/kecamatan/Medan_Johor" class="btn btn-success btn-rounded" type="button">Medan Johor</a><br />
+			<a href="/kecamatan/Medan_Labuhan" class="btn btn-success btn-rounded" type="button">Medan Labuhan</a><br />
+			<a href="/kecamatan/Medan_Sunggal" class="btn btn-success btn-rounded" type="button">Medan Sunggal</a><br />
+			<a href="/kecamatan/Medan_Deli" class="btn btn-success btn-rounded" type="button">Medan Deli</a><br />
+			<a href="/kecamatan/Medan_Kota" class="btn btn-success btn-rounded" type="button">Medan Kota</a><br />
+			<a href="/kecamatan/Medan_Tembung" class="btn btn-success btn-rounded" type="button">Medan Tembung</a><br />
+			<a href="/kecamatan/Medan_Tuntungan" class="btn btn-success btn-rounded" type="button">Medan Tuntungan</a><br />
+			<a href="/kecamatan/Medan_Timur" class="btn btn-success btn-rounded" type="button">Medan Timur</a><br />
+			<a href="/kecamatan/Medan_Amplas" class="btn btn-success btn-rounded" type="button">Medan Amplas</a><br />
+			<a href="/kecamatan/Medan_Selayang" class="btn btn-success btn-rounded" type="button">Medan Selayang</a><br />
+			<a href="/kecamatan/Medan_Area" class="btn btn-success btn-rounded" type="button">Medan Area</a><br />
+			<a href="/kecamatan/Medan_Perjuangan" class="btn btn-success btn-rounded" type="button">Medan Perjuangan</a><br />
+			<a href="/kecamatan/Medan_Kota_Belawan" class="btn btn-success btn-rounded" type="button">Medan Kota Belawan</a><br />
+			<a href="/kecamatan/Medan_Petisah" class="btn btn-success btn-rounded" type="button">Medan Petisah</a><br />
+			<a href="/kecamatan/Medan_Barat" class="btn btn-success btn-rounded" type="button">Medan Barat</a><br />
+			<a href="/kecamatan/Medan_Baru" class="btn btn-success btn-rounded" type="button">Medan Baru</a><br />
+			<a href="/kecamatan/Medan_Maimun" class="btn btn-success btn-rounded" type="button">Medan Maimun</a><br />
+			<a href="/kecamatan/Medan_Polonia" class="btn btn-success btn-rounded" type="button">Medan Polonia</a><br />
+		</section>
 
-                        <p class="text-black d-flex mb-1">
-                            
-                                Kelompok 1          
-                        </p>
+		<section class="section-padding" id="tabel" style="margin: 0 auto; margin-top: 20px; width: 80%; padding: 10px">
+			<div class="btn-group mb-3">
+				<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Semua Jenjang</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="bentukDropdown">
+					<a class="dropdown-item bentuk-dropdown-item" data-bentuk="Semua Jenjang">Semua Jenjang</a>
+					{% for bentuk_pendidikan in bentuk_pendidikan_classification %}
+					<li>
+						<a class="dropdown-item bentuk-dropdown-item" data-bentuk="{{ bentuk_pendidikan['bentukPendidikan'] }}"> {{ bentuk_pendidikan['bentukPendidikan'].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }} </a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<table id="example" class="table table-striped" style="width: 100%">
+				<thead>
+					<tr>
+						<th>Nama</th>
+						<th>NPSN</th>
+						<th>Akreditasi</th>
+						<th>Bentuk Pendidikan</th>
+						<th>Kecamatan</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for school in results %}
+					<tr>
+						<td>{{ school["namaSekolah"]["value"] }}</td>
+						<td>{{ school["npsn"]["value"] }}</td>
+						<td>{{ school["akreditasi"]["value"] if school["akreditasi"]["value"] else "None" }}</td>
+						<td>{{ school["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</td>
+						<td>{{ selectedKecamatan.replace('_', ' ') }}</td>
+						<td>
+							<!-- Add action buttons or links as needed -->
+							<a href="{{ url_for('detail', npsn=school['npsn']['value']) }}">Details</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+		<footer class="site-footer section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-12 mb-4 pb-2">
+						<a class="navbar-brand mb-2">
+							<i class="bi-back"></i>
+							<span class="text-dark">EduSearch</span>
+						</a>
+					</div>
+					<div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+						<h6 class="site-footer-title mb-3">About Us</h6>
 
-                        <p class="text-black d-flex">
-                            Web Semantik
-                        </p>
-                    </div>
+						<p class="text-black d-flex mb-1">Kelompok 1</p>
 
-                 
-                </div>
-            </div>
-        </footer>
+						<p class="text-black d-flex">Web Semantik</p>
+					</div>
+				</div>
+			</div>
+		</footer>
 
-        <!-- JAVASCRIPT FILES -->
-        <script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
-        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
-        <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
-        <script src="{{url_for('static', filename='js/custom.js')}}"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                // Initialize DataTable
-                var table = $('#example').DataTable({
-                    dom: 'lrtip',
-                    order: [[3, 'desc']]
-                });
-        
-            // Handle dropdown item click
-            $('.bentuk-dropdown-item').on('click', function () {
-                    // Get the selected bentukPendidikan value
-                    var selectedBentuk = $(this).data('bentuk');
+		<!-- JAVASCRIPT FILES -->
+		<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+		<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
+		<script src="{{url_for('static', filename='js/custom.js')}}"></script>
+		<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				// Initialize DataTable
+				var table = $("#example").DataTable({
+					dom: "lrtip",
+					order: [[3, "desc"]],
+				});
 
-                    console.log('Selected Bentuk:', selectedBentuk);
+				// Handle dropdown item click
+				$(".bentuk-dropdown-item").on("click", function () {
+					// Get the selected bentukPendidikan value
+					var selectedBentuk = $(this).data("bentuk");
 
-                    // Reset the search input and draw the DataTable to show all data
-                    table.search('').columns().search('').draw();
+					console.log("Selected Bentuk:", selectedBentuk);
 
-                    if (selectedBentuk !== 'Semua Jenjang') {
-                        // If not "Semua Jenjang," set the search to the selected bentukPendidikan
-                        table.columns(3).search(selectedBentuk.replace('https:///schema/Instansi_sumut#', '').replace('_', ' ')).draw();
-                    }
-                });
-            });
-        </script> 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var tabelSection = document.getElementById('tabel');
-                
-                // Check if the URL contains a kecamatan parameter
-                var kecamatanParam = window.location.pathname.split('/')[2]; // Assuming kecamatan is the third part of the path
-                
-                // Hide the section if the kecamatan parameter is not present
-                if (!kecamatanParam) {
-                    tabelSection.style.display = 'none';
-                }
-            });
-        </script>
+					// Reset the search input and draw the DataTable to show all data
+					table.search("").columns().search("").draw();
 
-    </body>
+					if (selectedBentuk !== "Semua Jenjang") {
+						// If not "Semua Jenjang," set the search to the selected bentukPendidikan
+						table.columns(3).search(selectedBentuk.replace("https:///schema/Instansi_sumut#", "").replace("_", " ")).draw();
+					}
+				});
+			});
+		</script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				var tabelSection = document.getElementById("tabel");
+
+				// Check if the URL contains a kecamatan parameter
+				var kecamatanParam = window.location.pathname.split("/")[2]; // Assuming kecamatan is the third part of the path
+
+				// Hide the section if the kecamatan parameter is not present
+				if (!kecamatanParam) {
+					tabelSection.style.display = "none";
+				}
+			});
+		</script>
+	</body>
 </html>
