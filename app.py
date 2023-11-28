@@ -139,9 +139,9 @@ def index():
                 regex(STR(?npsn), "{keyword}", "i")
             )
 
-   {f'FILTER(?bentukPendidikan = "{bentuk_pendidikan}")' if bentuk_pendidikan else ''}
+            {f'FILTER(?bentukPendidikan = "{bentuk_pendidikan}")' if bentuk_pendidikan else ''}
 
-}}
+        }}
     """
 
     if keyword or bentuk_pendidikan:

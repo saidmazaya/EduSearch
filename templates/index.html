@@ -90,6 +90,9 @@
 			</section>
 
 			<section class="section-padding" style="margin: 0 auto; margin-top: 20px; width: 80%; padding: 10px">
+				{% if keyword %}
+				<h3>Hasil Pencarian dari <span style="color: #13547a">{{ keyword }}</span></h3>
+				{% endif %}
 				<div class="btn-group mb-3">
 					<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Semua Jenjang</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="bentukDropdown">
