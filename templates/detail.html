@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Web Semantik</title>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Web Semantik">
+    <meta property="og:description" content="Deskripsi Konten Anda">
+    <meta property="og:image" content="URL_GAMBAR">
+    <meta property="og:url" content="URL_HALAMAN">
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        .custom-navbar {
+            background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="/index">
+                    <i class="bi-back"></i>
+                    <span>EduSearch </span>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </main>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="team-single">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 xs-margin-30px-bottom">
+                        <div class="team-single-img">
+                            <img src="https://disdikbud.banyuasinkab.go.id/wp-content/uploads/sites/269/2022/11/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="">
+                        </div>
+                        <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
+                            <h6 class="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">Link Sekolah</h6>
+                            <a href="{{ data[0]['linkSekolah']['value'] }}" class="text-dark-gray text-decoration-line-bottom text-uppercase font-size14">Kunjungi Sekolah</a>
+                            <div class="margin-20px-top team-single-icons">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="team-single-text padding-50px-left sm-no-padding-left">
+                            <h4 class="font-size38 sm-font-size32 xs-font-size30">{{ data[0]["namaSekolah"]["value"] }}</h4><br>
+                            <div class="contact-info-section margin-40px-tb">
+                                <ul class="list-style9 no-margin">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-graduation-cap text-orange"></i>
+                                                <strong class="margin-10px-left text-orange">NPSN :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ npsn }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-light fa-star text-yellow"></i>
+                                                <strong class="margin-10px-left text-yellow">Status :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ data[0]["status"]["value"] }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-light fa-check-circle text-primary"></i>
+                                                <strong class="margin-10px-left text-primary">Akreditasi :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ data[0]["akreditasi"]["value"] }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                    <li>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-light fa-map text-pink"></i>
+                                                <strong class="margin-10px-left text-pink">Kecamatan :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ data[0]["kecamatan"]["value"].replace('https:///schema/Instansi_sumut#Kecamatan', '').replace('_', ' ') }}</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-light fa-school text-green"></i>
+                                                <strong class="margin-10px-left text-green">Bentuk Pendidikan :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ data[0]["bentukPendidikan"]["value"].replace('https:///schema/Instansi_sumut#', '').replace('_', ' ') }}</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="fas fa-light fa-calendar text-purple"></i>
+                                                <strong class="margin-10px-left xs-margin-four-left text-purple">Tanggal Berdiri :</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <p>{{ data[0]["tanggalPendirian"]["value"] }}</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-5 col-12 mb-4 mb-lg-0" id="map" style="height: 250px;">
+
+                </div>
+                <div class="col-lg-3 col-md-6 col-12 ">
+                    <h4 class="mb-3">Alamat</h4>
+                    <p>{{ data[0]["alamat"]["value"] }}</p>
+                    <hr>
+                    <p class="d-flex align-items-center mb-1">
+                        <span class="me-2">Lintang</span>
+                        <a class="site-footer-link">
+                            {{ data[0]["lintang"]["value"] }}
+                        </a>
+                    </p>
+
+                    <p class="d-flex align-items-center">
+                        <span class="me-2">Bujur</span>
+                        <a class="site-footer-link">
+                            {{ data[0]["bujur"]["value"] }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </section>
+
+
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand mb-2" href="/index">
+                        <i class="bi-back"></i>
+                        <span>EduSearch</span>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">About Us</h6>
+
+                    <p class="text-black d-flex mb-1">
+
+                        Kelompok 1
+                    </p>
+
+                    <p class="text-black d-flex">
+                        Web Semantik
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">More</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Home</a>
+                        </li>
+
+
+                        <a href="https://maps.google.co.id/maps?expflags=enable_star_based_justifications:true&ie=UTF8&f=d&daddr={{data[0]['lintang']['value']}},{{data[0]['bujur']['value']}}">Semangat</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var data = {{ data | safe }};
+
+        // Check if data is not empty before accessing properties
+        if (data.length > 0) {
+            var latitude = parseFloat(data[0]["lintang"]["value"]);
+            var longitude = parseFloat(data[0]["bujur"]["value"]);
+
+            console.log("Parsed Latitude:", latitude);
+            console.log("Parsed Longitude:", longitude);
+
+            // Initialize the map
+            var map = L.map('map').setView([latitude, longitude], 15);
+
+            // Add a tile layer (you can use any tile provider, here is OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Create a marker with a popup
+            var marker = L.marker([latitude, longitude]).addTo(map);
+            marker.bindPopup(`${data[0]["namaSekolah"]["value"]}<br><a href="https://maps.google.co.id/maps?expflags=enable_star_based_justifications:true&ie=UTF8&f=d&daddr=${latitude},${longitude}" target="_blank">View on Google Maps</a>`).openPopup();
+        } else {
+            console.error("No data available for the specified school.");
+        }
+    </script>
+
+    <!-- Add a container for the Google Maps link -->
+
+
+</body>
+
+</html>
