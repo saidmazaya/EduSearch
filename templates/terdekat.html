@@ -145,7 +145,7 @@
 		<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-		
+
 		<script>
 			$(document).ready(function () {
 				// Initialize DataTable
@@ -175,58 +175,58 @@
 		<script>
 			async function requestLocationPermission() {
 				try {
-					const status = await navigator.permissions.query({ name: 'geolocation' });
-			
-					if (status.state === 'granted') {
+					const status = await navigator.permissions.query({ name: "geolocation" });
+
+					if (status.state === "granted") {
 						getUserLocation();
-					} else if (status.state === 'prompt') {
+					} else if (status.state === "prompt") {
 						// Display a custom message or use the default browser prompt
-						const result = confirm('This site wants to access your location. Allow?');
+						const result = confirm("This site wants to access your location. Allow?");
 						if (result) {
 							getUserLocation();
 						} else {
-							console.log('User denied location permission.');
+							console.log("User denied location permission.");
 						}
-					} else if (status.state === 'denied') {
-						console.log('User denied location permission.');
+					} else if (status.state === "denied") {
+						console.log("User denied location permission.");
 					}
 				} catch (error) {
-					console.error('Error requesting location permission:', error);
+					console.error("Error requesting location permission:", error);
 				}
 			}
-			
+
 			function getUserLocation() {
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(
-						function(position) {
+						function (position) {
 							var userLatitude = position.coords.latitude;
 							var userLongitude = position.coords.longitude;
-			
+
 							// Now you have the user's location, you can use it for further actions
-							console.log('User Latitude:', userLatitude);
-							console.log('User Longitude:', userLongitude);
-			
+							console.log("User Latitude:", userLatitude);
+							console.log("User Longitude:", userLongitude);
+
 							// Call a function or perform an action with the user's location
 							// For example, you can update your table with the new user location
 							updateTableWithUserLocation(userLatitude, userLongitude);
 						},
-						function(error) {
-							console.error('Error getting user location:', error.message);
+						function (error) {
+							console.error("Error getting user location:", error.message);
 						}
 					);
 				} else {
-					console.error('Geolocation is not supported by this browser.');
+					console.error("Geolocation is not supported by this browser.");
 				}
 			}
-			
+
 			function updateTableWithUserLocation(latitude, longitude) {
 				// Perform actions to update your table with the new user location
 				// For example, you can recalculate distances and update the table
-			
+
 				// Redirect to the specified URL with latitude and longitude parameters
 				const redirectUrl = `/terdekat?latitude=${latitude}&longitude=${longitude}`;
 				window.location.href = redirectUrl;
 			}
-			</script>
+		</script>
 	</body>
 </html>

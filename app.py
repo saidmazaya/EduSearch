@@ -195,6 +195,42 @@ def haversine(lat1, lon1, lat2, lon2):
     distance = R * c
     return distance
 
+# Vincenty Formulae
+def vincenty_distance(lat1, lon1, lat2, lon2):
+    # WGS-84 ellipsoidal parameters
+    a = 6378137.0  # semi-major axis in meters
+    f = 1 / 298.257223563  # flattening
+    b = (1 - f) * a  # semi-minor axis
+
+    # Convert degrees to radians
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+    U1 = math.atan((1 - f) * math.tan(lat1))
+    U2 = math.atan((1 - f) * math.tan(lat2))
+    lon_diff = lon2 - lon1
+    lambda_old = lon_diff
+    lambda_new = 2 * math.pi
+
+    while abs(lambda_new - lambda_old) > 1e-12:
+        sin_sigma = math.sqrt((math.cos(U2) * math.sin(lon_diff))**2 + (math.cos(U1) * math.sin(U2) - math.sin(U1) * math.cos(U2) * math.cos(lon_diff))**2)
+        cos_sigma = math.sin(U1) * math.sin(U2) + math.cos(U1) * math.cos(U2) * math.cos(lon_diff)
+        sigma = math.atan2(sin_sigma, cos_sigma)
+        sin_alpha = math.cos(U1) * math.cos(U2) * math.sin(lon_diff) / math.sin(sigma)
+        cos_sq_alpha = 1 - sin_alpha**2
+        cos_2sigma_m = cos_sigma - 2 * math.sin(U1) * math.sin(U2) / cos_sq_alpha
+        C = f / 16 * cos_sq_alpha * (4 + f * (4 - 3 * cos_sq_alpha))
+        lambda_old = lambda_new
+        lambda_new = lon_diff + (1 - C) * f * sin_alpha * (sigma + C * math.sin(sigma) * (cos_2sigma_m + C * math.cos(sigma) * (-1 + 2 * cos_2sigma_m**2)))
+
+    u_sq = cos_sq_alpha * (a**2 - b**2) / (b**2)
+    A = 1 + u_sq / 16384 * (4096 + u_sq * (-768 + u_sq * (320 - 175 * u_sq)))
+    B = u_sq / 1024 * (256 + u_sq * (-128 + u_sq * (74 - 47 * u_sq)))
+    delta_sigma = B * math.sin(sigma) * (cos_2sigma_m + B / 4 * (math.cos(sigma) * (-1 + 2 * cos_2sigma_m**2) - B / 6 * cos_2sigma_m * (-3 + 4 * sin_sigma**2) * (-3 + 4 * cos_2sigma_m**2)))
+
+    distance = b * A * (sigma - delta_sigma)
+
+    return distance
+
 @app.route('/terdekat', methods=['GET', 'POST'])
 def terdekat():
     # SPARQL query to retrieve details for the specified NPSN
