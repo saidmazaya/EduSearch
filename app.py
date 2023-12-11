@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 from rdflib import Graph, Namespace,Literal,URIRef
 from rdflib.plugins.sparql import prepareQuery
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -107,12 +107,7 @@ def kecamatan_detail(kecamatan):
 
 @app.route('/')
 def home():
-    data_to_pass = {
-        'judul': 'Contoh Aplikasi Flask',
-        'pesan': 'Selamat datang di aplikasi Flask sederhana!',
-        'items_list': ['Item 1', 'Item 2', 'Item 3']
-    }
-    return render_template('home.html', data=data_to_pass)
+    return redirect(url_for('index'))
 
 # Fungsi route '/index'
 @app.route('/index')
